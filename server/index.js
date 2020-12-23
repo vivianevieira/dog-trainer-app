@@ -18,17 +18,16 @@ const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
 app.post('/api/clients', (req, res, next) => {
-  console.log('req.body:', req.body);
-  const { name, owner1, breed} = req.body;
+  const { name, owner1, breed } = req.body;
   if (!name || !owner1) {
     throw new ClientError(400, 'dogs name and owners name are required fields');
-    }
+  }
   const sql = `
   insert into "Clients" ("name", "owner1", "breed")
   values ($1, $2, $3)
   returning *
   `;
-  const params = [name, owner1, breed ];
+  const params = [name, owner1, breed];
   db.query(sql, params)
     .then(result => {
       const [client] = result.rows;

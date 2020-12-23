@@ -13,10 +13,8 @@ export default class QuickEntry extends React.Component {
   }
 
   handleChange(e) {
-    console.log('event.target.name', event.target.name)
-    console.log('event.target.value', event.target.value)
-    const {name, value} = event.target;
-    this.setState({ [name]: value});
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
@@ -31,15 +29,15 @@ export default class QuickEntry extends React.Component {
     fetch('/api/clients', req)
       .then(res => res.json())
       .then(result => {
-        this.setState(result)
-      })
+        this.setState(result);
+      });
   }
 
   render() {
     return (
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-6 ">
+          <div className="col-md-6 ">
             <div>
               <h4 className="text-center heading">
                 Create new entry
@@ -48,7 +46,7 @@ export default class QuickEntry extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="name" className="form-label label1">
-                  Dog's Name
+                  Dog&apos;s Name
                 </label>
                 <input
                   required
@@ -59,8 +57,8 @@ export default class QuickEntry extends React.Component {
                   className="form-control" />
               </div>
               <div className="mb-3">
-                <label htmlFor="owner1" className="form-label">
-                  Owner's name
+                <label htmlFor="owner1" className="form-label label1">
+                  Owner&apos;s name
                 </label>
                 <input
                   required
@@ -71,7 +69,7 @@ export default class QuickEntry extends React.Component {
                   className="form-control" />
               </div>
               <div className="mb-3">
-                <label htmlFor="breed" className="form-label">
+                <label htmlFor="breed" className="form-label label1">
                   Breed
                 </label>
                 <input
@@ -81,11 +79,14 @@ export default class QuickEntry extends React.Component {
                   onChange={this.handleChange}
                   className="form-control" />
               </div>
-              <div>
-                <button type="submit" className="btn btn-primary mb-3">
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary mb-3 save-btn1">
                   Save
                 </button>
-              </div>
+                </div>
+              <div className="d-flex justify-content-center">
+                  Cancel
+                </div>
             </form>
           </div>
         </div>

@@ -1,6 +1,7 @@
 body {
   font-family: 'Manrope', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .heading {
   margin-top: 3.5rem;
   margin-bottom: 2rem;
@@ -9,4 +10,11 @@ body {
 
 .label1 {
   font-size: 1rem;
+  font-weight: 300;
+}
+
+.save-btn1 {
+  margin-top: 5rem;
+  padding: 1rem 4.5rem;
+  border-radius: 10pt;
 }
