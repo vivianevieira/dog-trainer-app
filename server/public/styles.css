@@ -1,0 +1,12 @@
+body {
+  font-family: 'Manrope', Tahoma, Geneva, Verdana, sans-serif;
+}
+.heading {
+  margin-top: 3.5rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.label1 {
+  font-size: 1rem;
+}
