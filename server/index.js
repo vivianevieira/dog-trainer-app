@@ -36,6 +36,21 @@ app.post('/api/clients', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/clients', (req, res, next) => {
+  const sql = `
+  select "name",
+         "owner1",
+         "owner2"
+    from "Clients"
+    order by "clientId"
+  `;
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
