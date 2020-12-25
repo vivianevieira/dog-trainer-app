@@ -83,10 +83,10 @@ export default class QuickEntry extends React.Component {
                 <button type="submit" className="btn btn-primary mb-3 save-btn1">
                   Save
                 </button>
-                </div>
+              </div>
               <div className="d-flex justify-content-center">
                   Cancel
-                </div>
+              </div>
             </form>
           </div>
         </div>
