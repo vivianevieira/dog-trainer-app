@@ -39,6 +39,7 @@ app.post('/api/clients', (req, res, next) => {
 app.get('/api/clients', (req, res, next) => {
   const sql = `
   select "name",
+         "clientId",
          "owner1",
          "owner2"
     from "Clients"
@@ -47,6 +48,25 @@ app.get('/api/clients', (req, res, next) => {
   db.query(sql)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/clients/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const sql = `
+  select "name",
+         "owner1",
+         "owner2"
+    from "Clients"
+    where "clientId" = $1
+    order by "clientId"
+  `;
+  const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      const [client] = result.rows;
+      res.json(client);
     })
     .catch(err => next(err));
 });

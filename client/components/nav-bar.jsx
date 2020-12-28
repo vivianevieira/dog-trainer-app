@@ -6,8 +6,8 @@ export default class Navbar extends React.Component {
     return (
       <div className="container nav-bar-container">
         <div className="row justify-content-start">
-          <nav className="nav nav-pills flex-column">
-            <div className="nav-bar-icon-cont">
+          <nav className="nav nav-pills flex-sm-column flex-row">
+            <div className="nav-bar-icon-cont flex-fill">
               <a className="nav-link nav-bar-text" href="#">
                 <div>
                   <i className="fas fa-home nav-bar-icon" />
@@ -17,7 +17,7 @@ export default class Navbar extends React.Component {
                 </div>
               </a>
             </div>
-            <div className="nav-bar-icon-cont">
+            <div className="nav-bar-icon-cont flex-fill">
               <a className="nav-link nav-bar-text" href="#">
                 <div>
                   <i className="far fa-calendar nav-bar-icon"></i>
@@ -25,7 +25,7 @@ export default class Navbar extends React.Component {
                 Calendar
               </a>
             </div>
-            <div className="nav-bar-icon-cont ">
+            <div className="nav-bar-icon-cont flex-fill">
               <a className="nav-link active nav-bar-text" aria-current="page" href="#">
                 <div>
                   <i className="far fa-user-circle nav-bar-icon" />
@@ -33,7 +33,7 @@ export default class Navbar extends React.Component {
                 Clients
               </a>
             </div>
-            <div className="nav-bar-icon-cont">
+            <div className="nav-bar-icon-cont flex-fill">
               <a className="nav-link nav-bar-text" href="#">
                 <div>
                   <i className="far fa-heart nav-bar-icon" />
@@ -45,6 +45,5 @@ export default class Navbar extends React.Component {
         </div>
       </div>
     );
-
   }
 }

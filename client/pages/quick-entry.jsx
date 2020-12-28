@@ -30,6 +30,7 @@ export default class QuickEntry extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState(result);
+        window.location.hash = '';
       });
   }
 
@@ -37,7 +38,7 @@ export default class QuickEntry extends React.Component {
     return (
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-md-6 ">
+          <div className="col">
             <div>
               <h4 className="text-center heading">
                 Create new entry
@@ -85,7 +86,7 @@ export default class QuickEntry extends React.Component {
                 </button>
               </div>
               <div className="d-flex justify-content-center">
-                  Cancel
+                <a href="#" className="text-secondary">Cancel</a>
               </div>
             </form>
           </div>
