@@ -8,9 +8,13 @@ function Client(props) {
       {/* Profile Picture */}
     </div>
     <div>
-      <div className="fs-6">
-        {props.client.name}
-      </div>
+      <a
+        href={`#clients?clientId=${props.clientId}`}
+        className="link-dark text-decoration-none">
+        <div className="fs-6">
+          {props.client.name}
+        </div>
+      </a>
       <div className="clients-text2 ">
         {props.client.owner1}
       </div>
