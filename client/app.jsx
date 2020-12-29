@@ -5,6 +5,7 @@ import PageTitle from './components/page-title';
 import PageContainer from './components/page-container';
 import Clients from './pages/clients';
 import parseRoute from './lib/parse-route';
+import ClientInputDetails from './pages/client-input-details1';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,9 @@ export default class App extends React.Component {
     }
     if (path === 'client-entry') {
       return <QuickEntry />;
+    }
+    if (path === 'client-edit-details') {
+      return <ClientInputDetails />;
     }
   }
 
