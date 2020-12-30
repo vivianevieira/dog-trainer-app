@@ -57,12 +57,63 @@ app.get('/api/clients/:clientId', (req, res, next) => {
   const sql = `
   select "name",
          "owner1",
-         "owner2"
+         "owner2",
+         "phone",
+         "email",
+         "dob",
+         "breed",
+         "gender",
+         "ownedSince",
+         "spayNeut",
+         "vaccinated",
+         "foodDiet",
+         "vet",
+         "health",
+         "training",
+         "profilePhoto",
+         "isActive"
     from "Clients"
     where "clientId" = $1
-    order by "clientId"
   `;
   const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      const [client] = result.rows;
+      res.json(client);
+    })
+    .catch(err => next(err));
+});
+
+app.put('/api/clients/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+
+  const sql = `
+  update "Clients"
+     set "name" = $2,
+         "owner1" = $3,
+         "owner2" = $4,
+         "phone" = $5,
+         "email" = $6,
+         "dob" = $7,
+         "breed" = $8,
+         "gender" = $9,
+         "ownedSince" = $10,
+         "spayNeut" = $11,
+         "vaccinated" = $12,
+         "foodDiet" = $13,
+         "vet" = $14,
+         "health" = $15,
+         "training" = $16,
+         "profilePhoto" = $17,
+         "isActive" = $18
+   where "clientId" = $1
+   returning *
+  `;
+  const {
+    name, owner1, owner2, phone, email, dob, breed, gender,
+    ownedSince, spayNeut, vaccinated, foodDiet, vet, health, training, profilePhoto, isActive
+  } = req.body;
+  const params = [clientId, name, owner1, owner2, phone, email, dob, breed, gender, ownedSince, spayNeut, vaccinated, foodDiet, vet, health, training, profilePhoto, isActive];
   db.query(sql, params)
     .then(result => {
       const [client] = result.rows;

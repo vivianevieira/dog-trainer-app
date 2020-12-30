@@ -4,12 +4,12 @@ function Client(props) {
   return (
     <div className="row">
     <div className="col d-flex clients-cont">
-    <div className="clients-pic-cont">
+        <div className="clients-pic-cont me-3">
       {/* Profile Picture */}
     </div>
     <div>
       <a
-        href={`#clients?clientId=${props.clientId}`}
+        href={`#clients?clientId=${props.client.clientId}`}
         className="link-dark text-decoration-none">
         <div className="fs-6">
           {props.client.name}
