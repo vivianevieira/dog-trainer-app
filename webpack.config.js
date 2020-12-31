@@ -42,5 +42,8 @@ module.exports = {
   },
   performance: {
     hints: false
+  },
+  watchOptions: {
+    ignored: [path.join(__dirname, 'server/public/images')]
   }
 };

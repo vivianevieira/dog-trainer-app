@@ -3,6 +3,7 @@ const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
+const uploadsMiddleware = require('./uploads-middleware');
 const pg = require('pg');
 
 const db = new pg.Pool({
@@ -84,8 +85,19 @@ app.get('/api/clients/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/clients/:clientId', (req, res, next) => {
+app.put('/api/clients/:clientId', uploadsMiddleware, (req, res, next) => {
   const clientId = parseInt(req.params.clientId, 10);
+  const {
+    name, owner1, owner2, phone, email, dob, breed, gender,
+    ownedSince, spayNeut, vaccinated, foodDiet, vet, health,
+    training, profilePhoto, isActive
+  } = req.body;
+  let url = '';
+  if (typeof req.file !== 'undefined') {
+    url = `/images/${req.file.filename}`;
+  } else {
+    url = profilePhoto;
+  }
 
   const sql = `
   update "Clients"
@@ -104,16 +116,16 @@ app.put('/api/clients/:clientId', (req, res, next) => {
          "vet" = $14,
          "health" = $15,
          "training" = $16,
-         "profilePhoto" = $17,
+         "profilePhoto" = coalesce($17, "profilePhoto"),
          "isActive" = $18
    where "clientId" = $1
    returning *
   `;
-  const {
-    name, owner1, owner2, phone, email, dob, breed, gender,
-    ownedSince, spayNeut, vaccinated, foodDiet, vet, health, training, profilePhoto, isActive
-  } = req.body;
-  const params = [clientId, name, owner1, owner2, phone, email, dob, breed, gender, ownedSince, spayNeut, vaccinated, foodDiet, vet, health, training, profilePhoto, isActive];
+  const params = [
+    clientId, name, owner1, owner2, phone, email, dob, breed,
+    gender, ownedSince, spayNeut, vaccinated, foodDiet, vet,
+    health, training, url, isActive
+  ];
   db.query(sql, params)
     .then(result => {
       const [client] = result.rows;

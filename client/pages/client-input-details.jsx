@@ -4,7 +4,23 @@ export default class ClientInputDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isActive: '',
+      profilePhoto: '',
+      name: '',
+      owner1: '',
+      owner2: '',
+      phone: '',
+      email: '',
+      breed: '',
+      dob: '',
+      gender: '',
+      ownedSince: '',
+      spayNeut: '',
+      vaccinated: '',
+      foodDiet: '',
+      vet: '',
+      health: '',
+      training: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,23 +39,22 @@ export default class ClientInputDetails extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit() {
-    const data = this.state;
+  handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
     const req = {
       method: 'PUT',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(data)
+      body: formData
     };
     fetch(`api/clients/${this.props.clientId}`, req)
       .then(response => response.json())
-      .then(data => this.setState(data));
-
+      .then(result => {
+        window.location.hash = '';
+      });
   }
 
   changeSpayNeut() {
-    if (this.state.spay_neut) {
+    if (this.state.spayNeut) {
       this.setState({ spayNeut: false });
     }
     if (!this.state.spayNeut) {
@@ -61,10 +76,14 @@ export default class ClientInputDetails extends React.Component {
 
     return (
       <div className="row content-cont">
+        <form onSubmit={this.handleSubmit}>
         <div className="row justify-content-between mb-4">
           <div className="col-8">
-            <div className="clients-pic-cont">
-
+            <div className="clients-pic-cont mb-3">
+            </div>
+            <div className="mb-3">
+              <label htmlFor="profilePhoto" className="form-label">Upload picture</label>
+              <input type="file" name="profilePhoto" onChange={this.handleChange} className="form-control form-control-sm" />
             </div>
           </div>
           <div className="col-4 text-end">
@@ -84,7 +103,6 @@ export default class ClientInputDetails extends React.Component {
         </div>
         <div className="row justify-content-center">
           <div className="col">
-            <form>
               <div className="mb-3">
                 <label htmlFor="" className="form-label label1">
                   Name
@@ -225,7 +243,6 @@ export default class ClientInputDetails extends React.Component {
                     name="spayNeut"
                     onChange={this.changeSpayNeut}
                     id="spay_neut"
-                    value={true}
                     checked={client.spayNeut === true} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     Yes
@@ -238,7 +255,6 @@ export default class ClientInputDetails extends React.Component {
                     name="spayNeut"
                     onChange={this.changeSpayNeut}
                     id="spay_neut2"
-                    value={false}
                     checked={client.spayNeut === false} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     No
@@ -306,12 +322,13 @@ export default class ClientInputDetails extends React.Component {
                   className="form-control" />
               </div>
               <div className="d-flex justify-content-end">
-                <a href="" className="btn btn-primary mb-3" onClick={this.handleSubmit}>Save</a>
+                <button type="submit" className="btn btn-primary mb-3">
+                  Save
+                </button>
               </div>
-
-            </form>
           </div>
         </div>
+        </form>
       </div>
     );
   }
