@@ -1,15 +1,21 @@
 import React from 'react';
 
 function Client(props) {
+  let $imagePreview = (<div className=""></div>);
+  if (props.client.profilePhoto) {
+    $imagePreview = (<img src={props.client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50"/>);
+  }
   return (
     <div className="row">
     <div className="col d-flex clients-cont">
-        <div className="clients-pic-cont me-3">
+        <div className="clients-pic-cont rounded-circle me-3">
+          {/* <img src="" alt="profile" className="mw-100 mh-100 rounded-circle" width="50" /> */}
       {/* Profile Picture */}
+          { $imagePreview }
     </div>
     <div>
       <a
-        href={`#clients?clientId=${props.client.clientId}`}
+        href={`#client-details?clientId=${props.client.clientId}`}
         className="link-dark text-decoration-none">
         <div className="fs-6">
           {props.client.name}

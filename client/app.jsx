@@ -6,6 +6,7 @@ import PageContainer from './components/page-container';
 import Clients from './pages/clients';
 import parseRoute from './lib/parse-route';
 import ClientInputDetails from './pages/client-input-details';
+import ClientDetails from './pages/client-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -32,6 +33,10 @@ export default class App extends React.Component {
     if (path === 'clients') {
       const clientId = this.state.route.params.get('clientId');
       return <ClientInputDetails clientId={clientId} />;
+    }
+    if (path === 'client-details') {
+      const clientId = this.state.route.params.get('clientId');
+      return <ClientDetails clientId={clientId}/>;
     }
   }
 

@@ -73,13 +73,18 @@ export default class ClientInputDetails extends React.Component {
 
   render() {
     const client = this.state;
+    let $imagePreview = (<div className=""></div>);
+    if (client.profilePhoto !== '' | client.profilePhoto !== null) {
+      $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
+    }
 
     return (
       <div className="row content-cont">
         <form onSubmit={this.handleSubmit}>
         <div className="row justify-content-between mb-4">
           <div className="col-8">
-            <div className="clients-pic-cont mb-3">
+              <div className="clients-pic-cont rounded-circle mb-3">
+                { $imagePreview }
             </div>
             <div className="mb-3">
               <label htmlFor="profilePhoto" className="form-label">Upload picture</label>
