@@ -205,8 +205,8 @@ export default class ClientInputDetails extends React.Component {
                     name="gender"
                     onChange={this.handleChange}
                     id="genderMale"
-                    value="male"
-                    checked={client.gender === 'male'} />
+                    value="Male"
+                    checked={client.gender === 'Male'} />
                   <label htmlFor="gender" className="form-check-label">
                     Male
                   </label>
@@ -218,8 +218,8 @@ export default class ClientInputDetails extends React.Component {
                     name="gender"
                     onChange={this.handleChange}
                     id="genderfemale"
-                    value="female"
-                    checked={client.gender === 'female'} />
+                    value="Female"
+                    checked={client.gender === 'Female'} />
                   <label htmlFor="gender" className="form-check-label">
                     Female
                   </label>
@@ -248,6 +248,7 @@ export default class ClientInputDetails extends React.Component {
                     name="spayNeut"
                     onChange={this.changeSpayNeut}
                     id="spay_neut"
+                    value="yes"
                     checked={client.spayNeut === true} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     Yes
@@ -260,6 +261,7 @@ export default class ClientInputDetails extends React.Component {
                     name="spayNeut"
                     onChange={this.changeSpayNeut}
                     id="spay_neut2"
+                    value="no"
                     checked={client.spayNeut === false} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     No

@@ -36,6 +36,12 @@ export default class ClientDetails extends React.Component {
     if (client.profilePhoto !== '' | client.profilePhoto !== null) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
+    let $spayNeut = '';
+    if (client.spayNeut === true) {
+      $spayNeut = 'Yes';
+    } else if (client.spayNeut === false) {
+      $spayNeut = 'No';
+    }
 
     return (
       <div className="row border border-1 rounded px-1 py-3">
@@ -49,52 +55,101 @@ export default class ClientDetails extends React.Component {
             </div>
           </div>
           <div className="col-4 text-end pe-0">
-            <a href="#clients" className="btn btn-outline-secondary add-new-btn">Edit</a>
+            <a href={`#clients?clientId=${this.props.clientId}`} className="btn btn-outline-secondary add-new-btn">Edit</a>
+          </div>
+        </div>
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <table className="table table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-secondary">Owner 1</td>
+                  <td>{client.owner1}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Owner 2</td>
+                  <td>{client.owner2}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Phone</td>
+                  <td>{client.phone}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Email</td>
+                  <td>{client.email}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="col-md-6">
+            <table className="table table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-secondary">DOB</td>
+                  <td>{client.dob}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Breed</td>
+                  <td>{client.breed}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Gender</td>
+                  <td>{client.gender}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <table className="table table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-secondary">Owned since</td>
+                  <td>{client.ownedSince}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Neutered/Spayed?</td>
+                  <td>{$spayNeut}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="col-md-6">
+            <table className="table table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-secondary">UTD on vaccines</td>
+                  <td>{client.vaccinated}</td>
+                </tr>
+                <tr>
+                  <td className="text-secondary">Follows a special diet?</td>
+                  <td>{client.foodDiet}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col">
             <table className="table table-borderless">
               <tbody>
                 <tr>
-                  <td>Owner 1</td>
-                  <td>Viviane V.</td>
+                  <td className="text-secondary">Vet’s contact</td>
+                  <td>{client.vet}</td>
                 </tr>
                 <tr>
-                  <td>Owner 2</td>
-                  <td>Keith. G</td>
+                  <td className="text-secondary">Health issues</td>
+                  <td>{client.health}</td>
                 </tr>
                 <tr>
-                  <td>Phone</td>
-                  <td>760-846-3348</td>
-                </tr>
-                <tr>
-                  <td>Email</td>
-                  <td>viviane.kodama@gmail.com</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="col-md-6">
-            <table className="table table-borderless">
-              <tbody>
-                <tr>
-                  <td>DOB</td>
-                  <td>04/01/2019</td>
-                </tr>
-                <tr>
-                  <td>Breed</td>
-                  <td>Australian Cattle Dog</td>
-                </tr>
-                <tr>
-                  <td>Gender</td>
-                  <td>Male</td>
+                  <td className="text-secondary">Has had training before?</td>
+                  <td>{client.training}</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
       </div>
     );
 
