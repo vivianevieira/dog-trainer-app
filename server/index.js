@@ -42,9 +42,10 @@ app.get('/api/clients', (req, res, next) => {
   select "name",
          "clientId",
          "owner1",
-         "owner2"
+         "owner2",
+         "profilePhoto"
     from "Clients"
-    order by "clientId"
+    order by "clientId" desc
   `;
   db.query(sql)
     .then(result => {

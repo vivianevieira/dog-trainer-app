@@ -75,8 +75,14 @@ body {
 .clients-pic-cont {
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
+
+  /* border-radius: 50%; */
   background-color: #c4c4c4;
+}
+
+.client-pic {
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .clients-text2 {

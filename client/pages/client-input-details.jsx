@@ -73,13 +73,18 @@ export default class ClientInputDetails extends React.Component {
 
   render() {
     const client = this.state;
+    let $imagePreview = (<div className=""></div>);
+    if (client.profilePhoto !== '' | client.profilePhoto !== null) {
+      $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
+    }
 
     return (
       <div className="row content-cont">
         <form onSubmit={this.handleSubmit}>
         <div className="row justify-content-between mb-4">
           <div className="col-8">
-            <div className="clients-pic-cont mb-3">
+              <div className="clients-pic-cont rounded-circle mb-3">
+                { $imagePreview }
             </div>
             <div className="mb-3">
               <label htmlFor="profilePhoto" className="form-label">Upload picture</label>
@@ -200,8 +205,8 @@ export default class ClientInputDetails extends React.Component {
                     name="gender"
                     onChange={this.handleChange}
                     id="genderMale"
-                    value="male"
-                    checked={client.gender === 'male'} />
+                    value="Male"
+                    checked={client.gender === 'Male'} />
                   <label htmlFor="gender" className="form-check-label">
                     Male
                   </label>
@@ -213,8 +218,8 @@ export default class ClientInputDetails extends React.Component {
                     name="gender"
                     onChange={this.handleChange}
                     id="genderfemale"
-                    value="female"
-                    checked={client.gender === 'female'} />
+                    value="Female"
+                    checked={client.gender === 'Female'} />
                   <label htmlFor="gender" className="form-check-label">
                     Female
                   </label>
@@ -243,6 +248,7 @@ export default class ClientInputDetails extends React.Component {
                     name="spayNeut"
                     onChange={this.changeSpayNeut}
                     id="spay_neut"
+                    value="yes"
                     checked={client.spayNeut === true} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     Yes
@@ -255,6 +261,7 @@ export default class ClientInputDetails extends React.Component {
                     name="spayNeut"
                     onChange={this.changeSpayNeut}
                     id="spay_neut2"
+                    value="no"
                     checked={client.spayNeut === false} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     No
