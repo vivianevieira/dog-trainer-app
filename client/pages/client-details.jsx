@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientAssessment from '../components/client-assessment';
 
 export default class ClientDetails extends React.Component {
   constructor(props) {
@@ -44,7 +45,8 @@ export default class ClientDetails extends React.Component {
     }
 
     return (
-      <div className="row border border-1 rounded px-1 py-3">
+      <>
+      <div className="row border border-1 rounded px-1 py-3 mb-4">
         <div className="row justify-content-between mb-4">
           <div className="col-8 d-flex align-items-center">
             <div className="clients-pic-cont rounded-circle me-3">
@@ -151,6 +153,9 @@ export default class ClientDetails extends React.Component {
           </div>
         </div>
       </div>
+      {/* Assessment component */}
+        <ClientAssessment clientId={this.props.clientId} />
+      </>
     );
 
   }

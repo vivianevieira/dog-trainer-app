@@ -34,12 +34,12 @@ CREATE TABLE "Clients" (
 
 
 CREATE TABLE "assessments" (
-	"assessment_id" integer NOT NULL,
+	"assessmentId" serial,
 	"clientId" integer NOT NULL,
-	"userId" integer NOT NULL,
-	"assessment_entry" varchar(500) NOT NULL,
-	"assessment_date" TIMESTAMP NOT NULL,
-	CONSTRAINT "assessments_pk" PRIMARY KEY ("assessment_id")
+	"userId" integer,
+	"assessmentEntry" varchar(500),
+	"assessmentDate" TIMESTAMP NOT NULL default now(),
+	CONSTRAINT "assessments_pk" PRIMARY KEY ("assessmentId")
 ) WITH (
   OIDS=FALSE
 );

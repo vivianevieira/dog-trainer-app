@@ -135,6 +135,40 @@ app.put('/api/clients/:clientId', uploadsMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/assessment/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const { assessmentEntry } = req.body;
+  const sql = `
+    insert into "assessments"("clientId", "assessmentEntry")
+    values ($1, $2)
+    returning *;
+  `;
+  const params = [clientId, assessmentEntry];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/assessment/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const sql = `
+  select "assessmentId",
+         "clientId",
+         "assessmentEntry",
+         "assessmentDate"
+    from "assessments"
+    where "clientId" = $1
+  `;
+  const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
