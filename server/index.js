@@ -146,7 +146,7 @@ app.post('/api/assessment/:clientId', (req, res, next) => {
   const params = [clientId, assessmentEntry];
   db.query(sql, params)
     .then(result => {
-      res.json(result.rows[0]);
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });

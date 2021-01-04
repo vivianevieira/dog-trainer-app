@@ -70,8 +70,10 @@ export default class ClientAssessment extends React.Component {
     fetch(`api/assessment/${this.props.clientId}`, req)
       .then(response => response.json())
       .then(result => {
-        this.setState({ newAssessment: '' });
-        this.getAssessments();
+        this.setState({
+          newAssessment: '',
+          assessments: this.state.assessments.concat(result)
+        });
       });
   }
 
