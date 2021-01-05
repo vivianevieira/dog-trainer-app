@@ -74,7 +74,7 @@ export default class ClientInputDetails extends React.Component {
   render() {
     const client = this.state;
     let $imagePreview = (<div className=""></div>);
-    if (client.profilePhoto !== '' | client.profilePhoto !== null) {
+    if (client.profilePhoto) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
 
