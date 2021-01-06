@@ -3,8 +3,8 @@ const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
-const uploadsMiddleware = require('./uploads-middleware');
 const pg = require('pg');
+const upload = require('./uploads-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL
@@ -86,7 +86,7 @@ app.get('/api/clients/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/clients/:clientId', uploadsMiddleware, (req, res, next) => {
+app.put('/api/clients/:clientId', upload.single('profilePhoto'), (req, res, next) => {
   const clientId = parseInt(req.params.clientId, 10);
   const {
     name, owner1, owner2, phone, email, dob, breed, gender,
@@ -95,7 +95,7 @@ app.put('/api/clients/:clientId', uploadsMiddleware, (req, res, next) => {
   } = req.body;
   let url = '';
   if (typeof req.file !== 'undefined') {
-    url = `/images/${req.file.filename}`;
+    url = `${req.file.location}`;
   } else {
     url = profilePhoto;
   }
@@ -159,6 +159,41 @@ app.get('/api/assessment/:clientId', (req, res, next) => {
          "assessmentEntry",
          "assessmentDate"
     from "assessments"
+    where "clientId" = $1
+  `;
+  const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/files/:clientId', upload.single('file'), (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const { key, mimetype, location } = req.file;
+  const { fileTitle } = req.body;
+  const sql = `
+    insert into "documents"("clientId", "fileName", "fileType", "fileTitle", "fileUrl")
+    values ($1, $2, $3, $4, $5)
+    returning *;
+  `;
+  const params = [clientId, key, mimetype, fileTitle, location];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/files/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const sql = `
+  select "fileId",
+         "fileTitle",
+         "fileUrl",
+         "uploadDate"
+    from "documents"
     where "clientId" = $1
   `;
   const params = [clientId];

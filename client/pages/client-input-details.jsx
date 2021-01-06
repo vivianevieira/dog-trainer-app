@@ -74,7 +74,7 @@ export default class ClientInputDetails extends React.Component {
   render() {
     const client = this.state;
     let $imagePreview = (<div className=""></div>);
-    if (client.profilePhoto !== '' | client.profilePhoto !== null) {
+    if (client.profilePhoto) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
 
@@ -88,7 +88,7 @@ export default class ClientInputDetails extends React.Component {
             </div>
             <div className="mb-3">
               <label htmlFor="profilePhoto" className="form-label">Upload picture</label>
-              <input type="file" name="profilePhoto" onChange={this.handleChange} className="form-control form-control-sm" />
+                <input type="file" name="profilePhoto" className="form-control form-control-sm" accept="image/png, image/jpeg"/>
             </div>
           </div>
           <div className="col-4 text-end">

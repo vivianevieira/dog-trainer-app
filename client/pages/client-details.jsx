@@ -1,5 +1,6 @@
 import React from 'react';
 import ClientAssessment from '../components/client-assessment';
+import ClientFileUpload from '../components/client-file-upload';
 
 export default class ClientDetails extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class ClientDetails extends React.Component {
   render() {
     const client = this.state;
     let $imagePreview = (<div className=""></div>);
-    if (client.profilePhoto !== '' | client.profilePhoto !== null) {
+    if (client.profilePhoto) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
     let $spayNeut = '';
@@ -121,7 +122,7 @@ export default class ClientDetails extends React.Component {
             <table className="table table-borderless">
               <tbody>
                 <tr>
-                  <td className="text-secondary">UTD on vaccines</td>
+                  <td className="text-secondary">UTD on vaccines?</td>
                   <td>{client.vaccinated}</td>
                 </tr>
                 <tr>
@@ -153,8 +154,8 @@ export default class ClientDetails extends React.Component {
           </div>
         </div>
       </div>
-      {/* Assessment component */}
         <ClientAssessment clientId={this.props.clientId} />
+        <ClientFileUpload clientId={this.props.clientId}/>
       </>
     );
 

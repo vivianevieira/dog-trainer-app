@@ -9,8 +9,6 @@ function Client(props) {
     <div className="row">
     <div className="col d-flex clients-cont">
         <div className="clients-pic-cont rounded-circle me-3">
-          {/* <img src="" alt="profile" className="mw-100 mh-100 rounded-circle" width="50" /> */}
-      {/* Profile Picture */}
           { $imagePreview }
     </div>
     <div>

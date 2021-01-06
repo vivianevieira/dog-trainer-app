@@ -75,8 +75,6 @@ body {
 .clients-pic-cont {
   width: 3rem;
   height: 3rem;
-
-  /* border-radius: 50%; */
   background-color: #c4c4c4;
 }
 
@@ -116,6 +114,16 @@ body {
 
 .search-icon {
   padding-left: 0.5rem;
+}
+
+.paper-clip-icon {
+  font-size: 0.8rem;
+  color: #818181;
+  margin-right: 0.8rem;
+}
+
+.smaller {
+  font-size: 0.8rem;
 }
 
 .bottom-nav {
