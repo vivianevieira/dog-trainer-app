@@ -63,12 +63,12 @@ CREATE TABLE "documents" (
 
 
 CREATE TABLE "notes" (
-	"note_id" integer NOT NULL,
+	"noteId" serial,
 	"clientId" integer NOT NULL,
-	"userId" integer NOT NULL,
+	"userId" integer,
 	"entry" varchar(255) NOT NULL,
-	"time_stamp" TIMESTAMP NOT NULL,
-	CONSTRAINT "notes_pk" PRIMARY KEY ("note_id")
+	"time_stamp" TIMESTAMP NOT NULL default now(),
+	CONSTRAINT "notes_pk" PRIMARY KEY ("noteId")
 ) WITH (
   OIDS=FALSE
 );
