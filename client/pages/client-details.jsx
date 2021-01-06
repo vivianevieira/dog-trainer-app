@@ -121,7 +121,7 @@ export default class ClientDetails extends React.Component {
             <table className="table table-borderless">
               <tbody>
                 <tr>
-                  <td className="text-secondary">UTD on vaccines</td>
+                  <td className="text-secondary">UTD on vaccines?</td>
                   <td>{client.vaccinated}</td>
                 </tr>
                 <tr>

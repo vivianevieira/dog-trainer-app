@@ -11,16 +11,16 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
-  }
-};
+// const fileFilter = (req, file, cb) => {
+//   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//     cb(null, true);
+//   } else {
+//     cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
+//   }
+// };
 
 const upload = multer({
-  fileFilter,
+  // fileFilter,
   storage: multerS3({
     s3: s3,
     bucket: process.env.AWS_S3_BUCKET,

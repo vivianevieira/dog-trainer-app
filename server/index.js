@@ -218,6 +218,24 @@ app.get('/api/assessment/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/files/:clientId', upload.single('file'), (req, res, next) => {
+  // console.log(req.body);
+  // console.log(req.file);
+  const clientId = parseInt(req.params.clientId, 10);
+  const { key, mimetype } = req.file;
+  const sql = `
+    insert into "documents"("clientId", "fileName", "fileType")
+    values ($1, $2, $3)
+    returning *;
+  `;
+  const params = [clientId, key, mimetype];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

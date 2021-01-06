@@ -47,12 +47,13 @@ CREATE TABLE "assessments" (
 
 
 CREATE TABLE "documents" (
-	"doc_id" integer NOT NULL,
+	"fileId" serial,
 	"clientId" integer NOT NULL,
-	"userId" integer NOT NULL,
-	"file_type" varchar(255) NOT NULL,
-	"file_name" varchar(255) NOT NULL,
-	CONSTRAINT "documents_pk" PRIMARY KEY ("doc_id")
+	"userId" integer,
+	"fileType" varchar(255),
+	"fileName" varchar(255) NOT NULL,
+	"uploadDate" TIMESTAMP NOT NULL default now(),
+	CONSTRAINT "documents_pk" PRIMARY KEY ("fileId")
 ) WITH (
   OIDS=FALSE
 );
