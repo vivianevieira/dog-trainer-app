@@ -220,6 +220,24 @@ app.post('/api/notes/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/notes/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const sql = `
+  select "noteId",
+         "clientId",
+         "entry",
+         "time_stamp"
+    from "notes"
+    where "clientId" = $1
+  `;
+  const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
