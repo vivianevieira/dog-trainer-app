@@ -11,16 +11,7 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-// const fileFilter = (req, file, cb) => {
-//   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-//     cb(null, true);
-//   } else {
-//     cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
-//   }
-// };
-
 const upload = multer({
-  // fileFilter,
   storage: multerS3({
     s3: s3,
     bucket: process.env.AWS_S3_BUCKET,
@@ -36,20 +27,3 @@ const upload = multer({
 });
 
 module.exports = upload;
-
-// const imagesDirectory = path.join(__dirname, 'public/images');
-
-// const storage = multer.diskStorage({
-//   destination(req, file, callback) {
-//     callback(null, imagesDirectory);
-//   },
-//   filename(req, file, callback) {
-//     const fileExtension = path.extname(file.originalname);
-//     const name = `${file.fieldname}-${Date.now()}${fileExtension}`;
-//     callback(null, name);
-//   }
-// });
-
-// const uploadsMiddleware = multer({ storage }).single('profilePhoto');
-
-// module.exports = uploadsMiddleware;

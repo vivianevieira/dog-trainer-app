@@ -135,55 +135,6 @@ app.put('/api/clients/:clientId', upload.single('profilePhoto'), (req, res, next
     .catch(err => next(err));
 });
 
-// app.put('/api/clients/:clientId', uploadsMiddleware, (req, res, next) => {
-//   const clientId = parseInt(req.params.clientId, 10);
-//   const {
-//     name, owner1, owner2, phone, email, dob, breed, gender,
-//     ownedSince, spayNeut, vaccinated, foodDiet, vet, health,
-//     training, profilePhoto, isActive
-//   } = req.body;
-//   let url = '';
-//   if (typeof req.file !== 'undefined') {
-//     url = `/images/${req.file.filename}`;
-//   } else {
-//     url = profilePhoto;
-//   }
-
-//   const sql = `
-//   update "Clients"
-//      set "name" = $2,
-//          "owner1" = $3,
-//          "owner2" = $4,
-//          "phone" = $5,
-//          "email" = $6,
-//          "dob" = $7,
-//          "breed" = $8,
-//          "gender" = $9,
-//          "ownedSince" = $10,
-//          "spayNeut" = $11,
-//          "vaccinated" = $12,
-//          "foodDiet" = $13,
-//          "vet" = $14,
-//          "health" = $15,
-//          "training" = $16,
-//          "profilePhoto" = coalesce($17, "profilePhoto"),
-//          "isActive" = $18
-//    where "clientId" = $1
-//    returning *
-//   `;
-//   const params = [
-//     clientId, name, owner1, owner2, phone, email, dob, breed,
-//     gender, ownedSince, spayNeut, vaccinated, foodDiet, vet,
-//     health, training, url, isActive
-//   ];
-//   db.query(sql, params)
-//     .then(result => {
-//       const [client] = result.rows;
-//       res.json(client);
-//     })
-//     .catch(err => next(err));
-// });
-
 app.post('/api/assessment/:clientId', (req, res, next) => {
   const clientId = parseInt(req.params.clientId, 10);
   const { assessmentEntry } = req.body;
@@ -219,8 +170,6 @@ app.get('/api/assessment/:clientId', (req, res, next) => {
 });
 
 app.post('/api/files/:clientId', upload.single('file'), (req, res, next) => {
-  // console.log(req.body);
-  // console.log(req.file);
   const clientId = parseInt(req.params.clientId, 10);
   const { key, mimetype, location } = req.file;
   const { fileTitle } = req.body;
@@ -240,7 +189,8 @@ app.post('/api/files/:clientId', upload.single('file'), (req, res, next) => {
 app.get('/api/files/:clientId', (req, res, next) => {
   const clientId = parseInt(req.params.clientId, 10);
   const sql = `
-  select "fileTitle",
+  select "fileId",
+         "fileTitle",
          "fileUrl",
          "uploadDate"
     from "documents"

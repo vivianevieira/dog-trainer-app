@@ -1,5 +1,42 @@
 import React from 'react';
 
+function File(props) {
+  const date = new Date(props.file.uploadDate);
+  return (
+      <div className="col mb-4">
+        <div className="d-flex flex-row align-items-center">
+          <i className="fas fa-paperclip paper-clip-icon"></i>
+        <a href={props.file.fileUrl} className="text-decoration-none text-body">
+            {props.file.fileTitle}
+          </a>
+        </div>
+        <div className="text-secondary ms-4 smaller">
+          {new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit'
+          }).format(date)}
+        </div>
+      </div>
+  );
+}
+
+function FileList(props) {
+  return (
+    <div className="row mb-4">
+      {
+        props.files.map(file => {
+          return (
+            < File
+              key={file.fileId}
+              file={file} />
+          );
+        })
+      }
+    </div>
+  );
+}
+
 export default class ClientFileUpload extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +60,6 @@ export default class ClientFileUpload extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    // console.log(formData);
     const req = {
       method: 'POST',
       body: formData
@@ -31,7 +67,9 @@ export default class ClientFileUpload extends React.Component {
     fetch(`api/files/${this.props.clientId}`, req)
       .then(response => response.json())
       .then(result => {
-        // console.log(result);
+        this.setState({
+          files: this.state.files.concat(result)
+        });
       });
   }
 
@@ -43,26 +81,7 @@ export default class ClientFileUpload extends React.Component {
             Files
           </div>
         </div>
-        <div className="row mb-4">
-          <div className="col">
-            <div className="d-flex flex-row align-items-center">
-              <i className="fas fa-paperclip paper-clip-icon"></i>
-              Vaccination records
-             </div>
-            {/* <div className="text-secondary ms-4 smaller">
-              file-1609892437142.pdf
-            </div> */}
-            <div className="text-secondary ms-4 smaller">
-              01/04/2020
-            </div>
-          </div>
-          <div className="col">
-            <div>
-              <i className="fas fa-paperclip paper-clip-icon"></i>
-            </div>
-            Doc2
-          </div>
-        </div>
+        <FileList files={this.state.files} />
         <div className="row mb-4">
           <div className="col">
             <form onSubmit={this.handleSubmit}>
