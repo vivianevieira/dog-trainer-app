@@ -1,6 +1,23 @@
 import React from 'react';
 
 export default class ClientNotes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notes: []
+    };
+    this.getNotes = this.getNotes.bind(this);
+  }
+
+  componentDidMount() {
+    this.getNotes();
+  }
+
+  getNotes() {
+    fetch(`/api/notes/${this.props.clientId}`)
+      .then(res => res.json())
+      .then(data => this.setState({ notes: data }));
+  }
 
   render() {
     return (
