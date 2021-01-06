@@ -1,5 +1,6 @@
 import React from 'react';
 import ClientAssessment from '../components/client-assessment';
+import ClientFileUpload from '../components/client-file-upload';
 
 export default class ClientDetails extends React.Component {
   constructor(props) {
@@ -154,6 +155,7 @@ export default class ClientDetails extends React.Component {
         </div>
       </div>
         <ClientAssessment clientId={this.props.clientId} />
+        <ClientFileUpload clientId={this.props.clientId}/>
       </>
     );
 

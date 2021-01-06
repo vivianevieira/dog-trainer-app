@@ -116,6 +116,16 @@ body {
   padding-left: 0.5rem;
 }
 
+.paper-clip-icon {
+  font-size: 0.8rem;
+  color: #818181;
+  margin-right: 0.8rem;
+}
+
+.smaller {
+  font-size: 0.8rem;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
