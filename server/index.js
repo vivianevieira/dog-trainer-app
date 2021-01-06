@@ -222,13 +222,14 @@ app.post('/api/files/:clientId', upload.single('file'), (req, res, next) => {
   // console.log(req.body);
   // console.log(req.file);
   const clientId = parseInt(req.params.clientId, 10);
-  const { key, mimetype } = req.file;
+  const { key, mimetype, location } = req.file;
+  const { fileTitle } = req.body;
   const sql = `
-    insert into "documents"("clientId", "fileName", "fileType")
-    values ($1, $2, $3)
+    insert into "documents"("clientId", "fileName", "fileType", "fileTitle", "fileUrl")
+    values ($1, $2, $3, $4, $5)
     returning *;
   `;
-  const params = [clientId, key, mimetype];
+  const params = [clientId, key, mimetype, fileTitle, location];
   db.query(sql, params)
     .then(result => {
       res.json(result.rows);

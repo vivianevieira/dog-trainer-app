@@ -1,6 +1,28 @@
 import React from 'react';
 
 export default class ClientFileUpload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    // console.log(formData);
+    const req = {
+      method: 'POST',
+      body: formData
+    };
+    fetch(`api/files/${this.props.clientId}`, req)
+      .then(response => response.json())
+      .then(result => {
+        // console.log(result);
+      });
+  }
 
   render() {
     return (
@@ -16,9 +38,9 @@ export default class ClientFileUpload extends React.Component {
               <i className="fas fa-paperclip paper-clip-icon"></i>
               Vaccination records
              </div>
-            <div className="text-secondary ms-4 smaller">
+            {/* <div className="text-secondary ms-4 smaller">
               file-1609892437142.pdf
-            </div>
+            </div> */}
             <div className="text-secondary ms-4 smaller">
               01/04/2020
             </div>
@@ -32,13 +54,13 @@ export default class ClientFileUpload extends React.Component {
         </div>
         <div className="row mb-4">
           <div className="col">
-            <form>
+            <form onSubmit={this.handleSubmit}>
             <div className="mb-3">
               <label htmlFor="fileName" className="col-form-label">File name</label>
-              <input type="text" className="form-control" id="fileName" />
+                <input type="text" className="form-control" id="fileName" name="fileTitle" required/>
             </div>
             <div className="mb-4">
-              <input className="form-control" type="file" />
+              <input className="form-control" type="file" name="file" required />
             </div>
             <div className="d-flex justify-content-end">
               <button type="submit" className="btn btn-primary">Submit</button>

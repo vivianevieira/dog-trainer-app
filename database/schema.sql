@@ -52,6 +52,8 @@ CREATE TABLE "documents" (
 	"userId" integer,
 	"fileType" varchar(255),
 	"fileName" varchar(255) NOT NULL,
+	"fileTitle" varchar(255) NOT NULL,
+	"fileUrl" varchar(255) NOT NULL,
 	"uploadDate" TIMESTAMP NOT NULL default now(),
 	CONSTRAINT "documents_pk" PRIMARY KEY ("fileId")
 ) WITH (
