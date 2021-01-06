@@ -4,9 +4,20 @@ export default class ClientFileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      files: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getFiles = this.getFiles.bind(this);
+  }
+
+  componentDidMount() {
+    this.getFiles();
+  }
+
+  getFiles() {
+    fetch(`api/files/${this.props.clientId}`)
+      .then(res => res.json())
+      .then(data => this.setState({ files: data }));
   }
 
   handleSubmit(event) {

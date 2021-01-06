@@ -237,6 +237,23 @@ app.post('/api/files/:clientId', upload.single('file'), (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/files/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const sql = `
+  select "fileTitle",
+         "fileUrl",
+         "uploadDate"
+    from "documents"
+    where "clientId" = $1
+  `;
+  const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
