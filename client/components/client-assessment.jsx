@@ -5,7 +5,7 @@ function Assessment(props) {
   return (
     <div className="row">
       <div className="col">
-        <div className="d-flex justify-content-end text-secondary">
+        <div className="d-flex justify-content-end text-secondary mb-2">
           {new Intl.DateTimeFormat('en-US', {
             year: 'numeric',
             month: 'long',
@@ -94,7 +94,7 @@ export default class ClientAssessment extends React.Component {
             <AssessmentList entries={this.state.assessments} />
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-4">
           <div className="col">
             <form onSubmit={this.handleSubmit}>
               <textarea

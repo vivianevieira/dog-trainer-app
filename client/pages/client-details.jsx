@@ -1,6 +1,7 @@
 import React from 'react';
 import ClientAssessment from '../components/client-assessment';
 import ClientFileUpload from '../components/client-file-upload';
+import ClientNav from '../components/client-details-nav';
 
 export default class ClientDetails extends React.Component {
   constructor(props) {
@@ -47,6 +48,9 @@ export default class ClientDetails extends React.Component {
 
     return (
       <>
+      <div className="row">
+        <ClientNav />
+      </div>
       <div className="row border border-1 rounded px-1 py-3 mb-4">
         <div className="row justify-content-between mb-4">
           <div className="col-8 d-flex align-items-center">
@@ -158,7 +162,5 @@ export default class ClientDetails extends React.Component {
         <ClientFileUpload clientId={this.props.clientId}/>
       </>
     );
-
   }
-
 }

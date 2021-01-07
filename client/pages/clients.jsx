@@ -78,31 +78,36 @@ export default class Clients extends React.Component {
       });
 
     return (
-            <div className="row content-cont">
-              <div className="row justify-content-between clients-search-row">
-                <div className="col-8">
-                  <form>
-                    <div className="input-group">
-                      <input
-                        type="search"
-                        id="inputSearchClients"
-                        aria-describedby=""
-                        className="form-control form-control-underlined"
-                        placeholder="Search clients"
-                        name=""
-                        onChange={this.handleChange} />
-                        <span className="text-secondary search-icon" >
-                          <i className="fa fa-search"></i>
-                        </span>
-                    </div>
-                  </form>
-                </div>
-                <div className="col-4 text-end clients-search-row">
-                  <a href="#client-entry" className="btn btn-outline-secondary add-new-btn">Add new</a>
-                </div>
+      <>
+      <div className="row">
+        <h6 className="page-title">Clients</h6>
+      </div>
+      <div className="row content-cont">
+        <div className="row justify-content-between clients-search-row">
+          <div className="col-8">
+            <form>
+              <div className="input-group">
+                <input
+                  type="search"
+                  id="inputSearchClients"
+                  aria-describedby=""
+                  className="form-control form-control-underlined"
+                  placeholder="Search clients"
+                  name=""
+                  onChange={this.handleChange} />
+                  <span className="text-secondary search-icon" >
+                    <i className="fa fa-search"></i>
+                  </span>
               </div>
-              <ClientList clients={fileteredClients} />
+            </form>
           </div>
+          <div className="col-4 text-end clients-search-row">
+            <a href="#client-entry" className="btn btn-outline-secondary add-new-btn">Add new</a>
+          </div>
+        </div>
+        <ClientList clients={fileteredClients} />
+      </div>
+          </>
     );
   }
 }

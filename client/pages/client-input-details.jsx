@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientNav from '../components/client-details-nav';
 
 export default class ClientInputDetails extends React.Component {
   constructor(props) {
@@ -79,6 +80,10 @@ export default class ClientInputDetails extends React.Component {
     }
 
     return (
+      <>
+      <div className="row">
+        <ClientNav />
+      </div>
       <div className="row content-cont">
         <form onSubmit={this.handleSubmit}>
         <div className="row justify-content-between mb-4">
@@ -337,6 +342,7 @@ export default class ClientInputDetails extends React.Component {
         </div>
         </form>
       </div>
+      </>
     );
   }
 }
