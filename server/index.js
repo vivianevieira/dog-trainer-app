@@ -257,6 +257,30 @@ app.post('/api/activitylog/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/activitylog/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  if (!clientId) {
+    throw new ClientError(400, 'clientId must be a positive integer');
+  }
+  const sql = `
+  select "activityId",
+         "clientId",
+         "entry",
+         "time_stamp"
+    from "activityLog"
+    where "clientId" = $1
+  `;
+  const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find client with clientId ${clientId}`);
+      }
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
