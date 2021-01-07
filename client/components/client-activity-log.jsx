@@ -5,6 +5,7 @@ export default class ClientActivityLog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activityLog: [],
       customActivity: '',
       distractions: null,
       leashwalking: null,
@@ -18,6 +19,12 @@ export default class ClientActivityLog extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(`api/activitylog/${this.props.clientId}`)
+      .then(res => res.json())
+      .then(data => this.setState({ activityLog: data }));
   }
 
   handleCheckBox(event) {
