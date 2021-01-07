@@ -238,6 +238,25 @@ app.get('/api/notes/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/activitylog/:clientId', (req, res, next) => {
+  const clientId = parseInt(req.params.clientId, 10);
+  const { entry } = req.body;
+  if (!entry) {
+    throw new ClientError(400, 'entry is a required field');
+  }
+  const sql = `
+    insert into "activityLog"("clientId", "entry")
+    values ($1, $2)
+    returning *;
+  `;
+  const params = [clientId, entry];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

@@ -75,13 +75,13 @@ CREATE TABLE "notes" (
 
 
 
-CREATE TABLE "activityLogEntries" (
-	"activity_id" serial NOT NULL,
+CREATE TABLE "activityLog" (
+	"activityId" serial,
 	"clientId" integer NOT NULL,
-	"userId" integer NOT NULL,
+	"userId" integer,
 	"entry" varchar(255) NOT NULL,
-	"time_stamp" TIMESTAMP(255) NOT NULL,
-	CONSTRAINT "activityLogEntries_pk" PRIMARY KEY ("activity_id")
+	"time_stamp" TIMESTAMP(255) NOT NULL default now(),
+	CONSTRAINT "activityLog_pk" PRIMARY KEY ("activityId")
 ) WITH (
   OIDS=FALSE
 );
