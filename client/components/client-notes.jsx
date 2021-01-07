@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientNav from './client-details-nav';
 
 function Note(props) {
   const date = new Date(props.note.time_stamp);
@@ -83,6 +84,10 @@ export default class ClientNotes extends React.Component {
 
   render() {
     return (
+      <>
+      <div className="row">
+        <ClientNav />
+      </div>
       <div className="row justify-content-center border border-1 roundex px-1 py-3 mb-4">
         <NotesList notes={this.state.notes} />
         <div className="row mb-4">
@@ -101,6 +106,7 @@ export default class ClientNotes extends React.Component {
           </form>
         </div>
       </div>
+      </>
     );
   }
 

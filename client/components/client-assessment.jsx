@@ -5,7 +5,7 @@ function Assessment(props) {
   return (
     <div className="row">
       <div className="col">
-        <div className="d-flex justify-content-end text-secondary">
+        <div className="d-flex justify-content-end text-secondary mb-2">
           {new Intl.DateTimeFormat('en-US', {
             year: 'numeric',
             month: 'long',
