@@ -94,7 +94,7 @@ export default class ClientAssessment extends React.Component {
             <AssessmentList entries={this.state.assessments} />
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-4">
           <div className="col">
             <form onSubmit={this.handleSubmit}>
               <textarea
