@@ -24,11 +24,14 @@ app.post('/api/clients', (req, res, next) => {
     throw new ClientError(400, 'dogs name and owners name are required fields');
   }
   const sql = `
-  insert into "Clients" ("name", "owner1", "breed")
-  values ($1, $2, $3)
-  returning *
+  insert into "Clients" ("name", "owner1", "breed", "owner2", "phone", "email",
+                         "dob", "gender", "ownedSince", "spayNeut", "vaccinated",
+                         "foodDiet", "vet", "health", "training", "isActive")
+                  values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,
+                          $13, $14, $15, $16)
+                returning *
   `;
-  const params = [name, owner1, breed];
+  const params = [name, owner1, breed, '', '', '', '', '', '', false, '', '', '', '', '', false];
   db.query(sql, params)
     .then(result => {
       const [client] = result.rows;

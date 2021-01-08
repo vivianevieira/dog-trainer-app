@@ -9,6 +9,7 @@ import ClientDetails from './pages/client-details';
 import ClientNotes from './components/client-notes';
 import ClientActivityLog from './components/client-activity-log';
 import AppContext from './lib/app-context';
+import WelcomePage from './pages/welcome-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class App extends React.Component {
   renderPage() {
     const { path } = this.state.route;
     const clientId = this.state.route.params.get('clientId');
-    if (path === '') {
+    if (path === 'client-list') {
       return <Clients />;
     }
     if (path === 'client-entry') {
@@ -47,6 +48,9 @@ export default class App extends React.Component {
     }
     if (path === 'client-activ-log') {
       return <ClientActivityLog clientId={clientId} />;
+    }
+    if (path === '') {
+      return <WelcomePage />;
     }
   }
 
