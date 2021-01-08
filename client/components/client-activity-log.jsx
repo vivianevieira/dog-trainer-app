@@ -1,6 +1,49 @@
 import React from 'react';
 import ClientNav from './client-details-nav';
 
+function Activity(props) {
+  const date = new Date(props.activity.time_stamp);
+  //   const array = props.activity.entry.split('.');
+  //   let string = '';
+  //   for (let i = 0; i < array.length; i++) {
+  //     string = `${array[i]}
+  // ${string}`;
+  //   };
+
+  return (
+    <div className="row mb-4">
+      <div className="col border-bottom pb-4">
+        <div className="d-flex justify-content-end text-secondary mb-2">
+          {new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit'
+          }).format(date)}
+        </div>
+        <div>
+          {props.activity.entry}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ActivityLogList(props) {
+  return (
+    <>
+      {
+        props.activityLog.map(entry => {
+          return (
+            <Activity
+              key={entry.activityId}
+              activity={entry} />
+          );
+        })
+      }
+    </>
+  );
+}
+
 export default class ClientActivityLog extends React.Component {
   constructor(props) {
     super(props);
@@ -8,13 +51,19 @@ export default class ClientActivityLog extends React.Component {
       activityLog: [],
       customActivity: '',
       distractions: null,
+      distractionsChecked: false,
       leashwalking: null,
+      leashwalkingChecked: false,
       obedience: null,
+      obedienceChecked: false,
       packwalk: null,
+      packwalkChecked: false,
       place: null,
+      placeChecked: false,
       socialization: null,
+      socializationChecked: false,
       treadmill: null,
-      newEntry: ''
+      treadmillChecked: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,9 +78,14 @@ export default class ClientActivityLog extends React.Component {
 
   handleCheckBox(event) {
     const { name, value } = event.target;
-    this.state.[name]
+    this.state[name]
       ? this.setState({ [name]: null })
       : this.setState({ [name]: value });
+    const checkboxName = `${name}Checked`;
+    const checkboxValue = event.target.checked;
+    this.setState({
+      [checkboxName]: checkboxValue
+    });
   }
 
   handleChange(event) {
@@ -41,15 +95,15 @@ export default class ClientActivityLog extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { customActivity, distractions, leashwalking, obedience, packwalk, place, socialization, treadmill } = this.state;
-    const newEntry = `${customActivity}
-    ${distractions}
-    ${leashwalking}
-    ${obedience}
-    ${packwalk}
-    ${place}
-    ${socialization}
-    ${treadmill}`;
+    const obj = this.state;
+    const array = [];
+    for (const prop in obj) {
+      if (obj[prop] && typeof obj[prop] === 'string') {
+        array.push(obj[prop]);
+      }
+    }
+    const newEntry = array.join(' ');
+
     const req = {
       method: 'POST',
       headers: {
@@ -60,9 +114,23 @@ export default class ClientActivityLog extends React.Component {
     fetch(`api/activitylog/${this.props.clientId}`, req)
       .then(response => response.json())
       .then(result => {
-        // console.log(result);
         this.setState({
-          customActivity: ''
+          activityLog: this.state.activityLog.concat(result),
+          customActivity: '',
+          distractions: null,
+          distractionsChecked: false,
+          leashwalking: null,
+          leashwalkingChecked: false,
+          obedience: null,
+          obedienceChecked: false,
+          packwalk: null,
+          packwalkChecked: false,
+          place: null,
+          placeChecked: false,
+          socialization: null,
+          socializationChecked: false,
+          treadmill: null,
+          treadmillChecked: false
         });
       });
   }
@@ -76,30 +144,59 @@ export default class ClientActivityLog extends React.Component {
           <ClientNav />
         </div>
         <div className="row justify-content-center border border-1 roundex px-1 py-3 mb-4">
+          <ActivityLogList activityLog={this.state.activityLog} />
           <div className="row">
           <form onSubmit={handleSubmit}>
             <div className="row mb-4">
               <div className="col">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="leashwalking" name="leashwalking" value="Walking properly on leash." onChange={handleCheckBox}/>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="leashwalking"
+                    name="leashwalking"
+                    value="Walking properly on leash."
+                    checked={this.state.leashwalkingChecked}
+                    onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="leashwalking">
                     Walking properly on leash
                   </label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="distractions" name="distractions" value="Working around distractions." onChange={handleCheckBox}/>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="distractions"
+                    name="distractions"
+                    value="Working around distractions."
+                    checked={this.state.distractionsChecked}
+                    onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="distractions">
                     Working around distractions
                   </label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="packwalk" name="packwalk" value="Pack walk." onChange={handleCheckBox}/>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="packwalk"
+                    name="packwalk"
+                    value="Pack walk."
+                    checked={this.state.packwalkChecked}
+                    onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="packwalk">
                     Pack walk
                   </label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="socialization" name="socialization" value="Socialization/play time." onChange={handleCheckBox}/>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="socialization"
+                    name="socialization"
+                    value="Socialization/play time."
+                    checked={this.state.socializationChecked}
+                    onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="socialization">
                     Socialization/play time
                   </label>
@@ -107,19 +204,40 @@ export default class ClientActivityLog extends React.Component {
               </div>
               <div className="col">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="obedience" name="obedience" value="Basic obedience." onChange={handleCheckBox} />
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="obedience"
+                    name="obedience"
+                    value="Basic obedience."
+                    checked={this.state.obedienceChecked}
+                    onChange={handleCheckBox} />
                   <label className="form-check-label" htmlFor="obedience">
                     Basic obedience
                   </label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="place" name="place" value="Place board training." onChange={handleCheckBox} />
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="place"
+                    name="place"
+                    value="Place board training."
+                    checked={this.state.placeChecked}
+                    onChange={handleCheckBox} />
                   <label className="form-check-label" htmlFor="place">
                     Place board training
                   </label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="treadmill" name="treadmill" value="Treadmill." onChange={handleCheckBox} />
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="treadmill"
+                    name="treadmill"
+                    value="Treadmill."
+                    checked={this.state.treadmillChecked}
+                    onChange={handleCheckBox} />
                   <label className="form-check-label" htmlFor="treadmill">
                     Treadmill
                   </label>
