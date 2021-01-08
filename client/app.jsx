@@ -7,6 +7,7 @@ import parseRoute from './lib/parse-route';
 import ClientInputDetails from './pages/client-input-details';
 import ClientDetails from './pages/client-details';
 import ClientNotes from './components/client-notes';
+import ClientActivityLog from './components/client-activity-log';
 import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
@@ -25,6 +26,7 @@ export default class App extends React.Component {
 
   renderPage() {
     const { path } = this.state.route;
+    const clientId = this.state.route.params.get('clientId');
     if (path === '') {
       return <Clients />;
     }
@@ -42,6 +44,9 @@ export default class App extends React.Component {
     if (path === 'client-notes') {
       const clientId = this.state.route.params.get('clientId');
       return <ClientNotes clientId={clientId}/>;
+    }
+    if (path === 'client-activ-log') {
+      return <ClientActivityLog clientId={clientId} />;
     }
   }
 
