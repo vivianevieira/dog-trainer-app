@@ -273,9 +273,6 @@ app.get('/api/activitylog/:clientId', (req, res, next) => {
   const params = [clientId];
   db.query(sql, params)
     .then(result => {
-      if (!result.rows[0]) {
-        throw new ClientError(404, `cannot find client with clientId ${clientId}`);
-      }
       res.json(result.rows);
     })
     .catch(err => next(err));

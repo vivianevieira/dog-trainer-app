@@ -126,6 +126,10 @@ body {
   font-size: 0.8rem;
 }
 
+.line-break {
+  white-space: pre-line;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;

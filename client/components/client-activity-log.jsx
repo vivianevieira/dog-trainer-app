@@ -3,12 +3,11 @@ import ClientNav from './client-details-nav';
 
 function Activity(props) {
   const date = new Date(props.activity.time_stamp);
-  //   const array = props.activity.entry.split('.');
-  //   let string = '';
-  //   for (let i = 0; i < array.length; i++) {
-  //     string = `${array[i]}
-  // ${string}`;
-  //   };
+  const array = props.activity.entry.split('.');
+  let string = '';
+  for (let i = 0; i < array.length; i++) {
+    string = string.concat(array[i], '\n');
+  }
 
   return (
     <div className="row mb-4">
@@ -20,8 +19,8 @@ function Activity(props) {
             day: '2-digit'
           }).format(date)}
         </div>
-        <div>
-          {props.activity.entry}
+        <div className="line-break">
+          {string}
         </div>
       </div>
     </div>
