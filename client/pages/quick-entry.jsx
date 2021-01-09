@@ -30,7 +30,7 @@ export default class QuickEntry extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState(result);
-        window.location.hash = '';
+        window.location.hash = 'client-list';
       });
   }
 

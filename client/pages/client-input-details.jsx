@@ -5,7 +5,7 @@ export default class ClientInputDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: '',
+      isActive: false,
       profilePhoto: '',
       name: '',
       owner1: '',
@@ -25,8 +25,6 @@ export default class ClientInputDetails extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.changeSpayNeut = this.changeSpayNeut.bind(this);
-    this.changeIsActive = this.changeIsActive.bind(this);
   }
 
   componentDidMount() {
@@ -36,13 +34,18 @@ export default class ClientInputDetails extends React.Component {
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
+    formData.set('isActive', this.state.isActive);
     const req = {
       method: 'PUT',
       body: formData
@@ -52,24 +55,6 @@ export default class ClientInputDetails extends React.Component {
       .then(result => {
         window.location.hash = `#client-details?clientId=${this.props.clientId}`;
       });
-  }
-
-  changeSpayNeut() {
-    if (this.state.spayNeut) {
-      this.setState({ spayNeut: false });
-    }
-    if (!this.state.spayNeut) {
-      this.setState({ spayNeut: true });
-    }
-  }
-
-  changeIsActive() {
-    if (this.state.isActive) {
-      this.setState({ isActive: false });
-    }
-    if (!this.state.isActive) {
-      this.setState({ isActive: true });
-    }
   }
 
   render() {
@@ -88,12 +73,12 @@ export default class ClientInputDetails extends React.Component {
         <form onSubmit={this.handleSubmit}>
         <div className="row justify-content-between mb-4">
           <div className="col-8">
-              <div className="clients-pic-cont rounded-circle mb-3">
-                { $imagePreview }
+            <div className="clients-pic-cont rounded-circle mb-3">
+              { $imagePreview }
             </div>
             <div className="mb-3">
               <label htmlFor="profilePhoto" className="form-label">Upload picture</label>
-                <input type="file" name="profilePhoto" className="form-control form-control-sm" accept="image/png, image/jpeg"/>
+              <input type="file" name="profilePhoto" className="form-control form-control-sm" accept="image/png, image/jpeg"/>
             </div>
           </div>
           <div className="col-4 text-end">
@@ -103,8 +88,9 @@ export default class ClientInputDetails extends React.Component {
                 type="checkbox"
                 id="isActive"
                 name="isActive"
-                onChange={this.changeIsActive}
-                checked={client.isActive === true} />
+                // value={client.isActive}
+                onChange={this.handleChange}
+                checked={client.isActive} />
               <label className="form-check-label ms-2" htmlFor="isActive">
                 Is active
               </label>
@@ -251,10 +237,10 @@ export default class ClientInputDetails extends React.Component {
                     className="form-check-input"
                     type="radio"
                     name="spayNeut"
-                    onChange={this.changeSpayNeut}
+                    onChange={this.handleChange}
                     id="spay_neut"
-                    value="yes"
-                    checked={client.spayNeut === true} />
+                    value="Yes"
+                    checked={client.spayNeut === 'Yes'} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     Yes
                   </label>
@@ -264,10 +250,10 @@ export default class ClientInputDetails extends React.Component {
                     className="form-check-input"
                     type="radio"
                     name="spayNeut"
-                    onChange={this.changeSpayNeut}
+                    onChange={this.handleChange}
                     id="spay_neut2"
-                    value="no"
-                    checked={client.spayNeut === false} />
+                    value="No"
+                    checked={client.spayNeut === 'No'} />
                   <label htmlFor="spay_neut" className="form-check-label">
                     No
                   </label>

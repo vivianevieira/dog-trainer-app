@@ -34,7 +34,7 @@ app.post('/api/clients', (req, res, next) => {
                           $13, $14, $15, $16)
                 returning *
   `;
-  const params = [name, owner1, breed, '', '', '', '', '', '', false, '', '', '', '', '', false];
+  const params = [name, owner1, breed, '', '', '', '', '', '', '', '', '', '', '', '', false];
   db.query(sql, params)
     .then(result => {
       const [client] = result.rows;
