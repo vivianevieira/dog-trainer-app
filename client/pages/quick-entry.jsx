@@ -86,7 +86,7 @@ export default class QuickEntry extends React.Component {
                 </button>
               </div>
               <div className="d-flex justify-content-center">
-                <a href="#" className="text-secondary">Cancel</a>
+                <a href="#client-list" className="text-secondary">Cancel</a>
               </div>
             </form>
           </div>

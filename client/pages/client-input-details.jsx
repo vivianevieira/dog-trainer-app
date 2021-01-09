@@ -50,7 +50,7 @@ export default class ClientInputDetails extends React.Component {
     fetch(`api/clients/${this.props.clientId}`, req)
       .then(response => response.json())
       .then(result => {
-        window.location.hash = '';
+        window.location.hash = `#client-details?clientId=${this.props.clientId}`;
       });
   }
 

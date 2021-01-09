@@ -89,17 +89,17 @@ CREATE TABLE "activityLog" (
 
 
 CREATE TABLE "calendarEvents" (
-	"event_id" serial NOT NULL,
+	"eventId" serial,
 	"clientId" integer,
-	"userId" integer NOT NULL,
+	"userId" integer,
 	"title" varchar(255) NOT NULL,
-	"description" varchar(500) NOT NULL,
-	"start_date" DATE NOT NULL,
-	"end_date" DATE NOT NULL,
-	"start_time" TIME NOT NULL,
-	"end_time" TIME NOT NULL,
-	"is_recurring" BOOLEAN NOT NULL,
-	CONSTRAINT "calendarEvents_pk" PRIMARY KEY ("event_id")
+	"description" varchar(500),
+	"startDate" DATE,
+	"endDate" DATE,
+	"startTime" TIME,
+	"endTime" TIME,
+	"is_recurring" BOOLEAN,
+	CONSTRAINT "calendarEvents_pk" PRIMARY KEY ("eventId")
 ) WITH (
   OIDS=FALSE
 );
@@ -107,11 +107,11 @@ CREATE TABLE "calendarEvents" (
 
 
 CREATE TABLE "users" (
-	"userId" serial NOT NULL,
-	"first_name" varchar(255) NOT NULL,
-	"last_name" varchar(255) NOT NULL,
-	"phone" varchar(50) NOT NULL,
-	"email" varchar(255) NOT NULL,
+	"userId" serial,
+	"firstName" varchar(255) NOT NULL,
+	"lastName" varchar(255),
+	"phone" varchar(50),
+	"email" varchar(255),
 	"password" varchar(50) NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
 ) WITH (

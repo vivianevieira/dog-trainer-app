@@ -1,14 +1,25 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class Navbar extends React.Component {
   render() {
+    const { route } = this.context;
+    const path = route.path;
+    const homeLinkClass = path === ''
+      ? 'nav-link active nav-bar-text'
+      : 'nav-link nav-bar-text';
+    const clientsLinkClass = path === 'client-details' || path === 'clients' ||
+      path === 'client-activ-log' || path === 'client-notes' || path === 'client-list' ||
+      path === 'client-entry'
+      ? 'nav-link active nav-bar-text'
+      : 'nav-link nav-bar-text';
 
     return (
       <div className="container nav-bar-container">
         <div className="row justify-content-start">
           <nav className="nav nav-pills flex-sm-column flex-row">
             <div className="nav-bar-icon-cont flex-fill">
-              <a className="nav-link nav-bar-text" href="#">
+              <a className={homeLinkClass} href="#">
                 <div>
                   <i className="fas fa-home nav-bar-icon" />
                 </div>
@@ -18,15 +29,7 @@ export default class Navbar extends React.Component {
               </a>
             </div>
             <div className="nav-bar-icon-cont flex-fill">
-              <a className="nav-link nav-bar-text" href="#">
-                <div>
-                  <i className="far fa-calendar nav-bar-icon"></i>
-                </div>
-                Calendar
-              </a>
-            </div>
-            <div className="nav-bar-icon-cont flex-fill">
-              <a className="nav-link active nav-bar-text" aria-current="page" href="#">
+              <a className={clientsLinkClass} aria-current="page" href="#client-list">
                 <div>
                   <i className="far fa-user-circle nav-bar-icon" />
                 </div>
@@ -47,3 +50,4 @@ export default class Navbar extends React.Component {
     );
   }
 }
+Navbar.contextType = AppContext;

@@ -130,6 +130,11 @@ body {
   white-space: pre-line;
 }
 
+.welcome-title {
+  font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
