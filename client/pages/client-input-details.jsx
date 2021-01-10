@@ -5,6 +5,7 @@ export default class ClientInputDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      imagePreviewUrl: null,
       isActive: false,
       profilePhoto: '',
       name: '',
@@ -25,6 +26,7 @@ export default class ClientInputDetails extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fileChangeHandler = this.fileChangeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -57,11 +59,24 @@ export default class ClientInputDetails extends React.Component {
       });
   }
 
+  fileChangeHandler(event) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      this.setState({
+        imagePreviewUrl: reader.result
+      });
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
   render() {
     const client = this.state;
     let $imagePreview = (<div className=""></div>);
     if (client.profilePhoto) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
+    }
+    if (client.imagePreviewUrl) {
+      $imagePreview = (<img src={client.imagePreviewUrl} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
 
     return (
@@ -78,7 +93,12 @@ export default class ClientInputDetails extends React.Component {
             </div>
             <div className="mb-3">
               <label htmlFor="profilePhoto" className="form-label">Upload picture</label>
-              <input type="file" name="profilePhoto" className="form-control form-control-sm" accept="image/png, image/jpeg"/>
+              <input
+                type="file"
+                name="profilePhoto"
+                className="form-control form-control-sm"
+                onChange={this.fileChangeHandler}
+                accept="image/png, image/jpeg"/>
             </div>
           </div>
           <div className="col-4 text-end">
@@ -88,7 +108,6 @@ export default class ClientInputDetails extends React.Component {
                 type="checkbox"
                 id="isActive"
                 name="isActive"
-                // value={client.isActive}
                 onChange={this.handleChange}
                 checked={client.isActive} />
               <label className="form-check-label ms-2" htmlFor="isActive">
