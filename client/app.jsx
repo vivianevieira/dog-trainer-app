@@ -10,6 +10,7 @@ import ClientNotes from './components/client-notes';
 import ClientActivityLog from './components/client-activity-log';
 import AppContext from './lib/app-context';
 import WelcomePage from './pages/welcome-page';
+import ActiveClients from './pages/active-clients';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -51,6 +52,9 @@ export default class App extends React.Component {
     }
     if (path === '') {
       return <WelcomePage />;
+    }
+    if (path === 'active') {
+      return <ActiveClients />;
     }
   }
 

@@ -284,6 +284,25 @@ app.get('/api/activitylog/:clientId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/active', (req, res, next) => {
+  const sql = `
+  select "name",
+         "clientId",
+         "owner1",
+         "owner2",
+         "profilePhoto"
+    from "Clients"
+    where "isActive" = $1
+    order by "clientId" desc
+  `;
+  const params = [true];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
