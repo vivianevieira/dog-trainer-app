@@ -48,21 +48,15 @@ export default class ClientActivityLog extends React.Component {
     super(props);
     this.state = {
       activityLog: [],
-      customActivity: '',
-      leashwalking: null,
-      leashwalkingChecked: false,
-      distractions: null,
-      distractionsChecked: false,
-      packwalk: null,
-      packwalkChecked: false,
-      socialization: null,
-      socializationChecked: false,
-      obedience: null,
-      obedienceChecked: false,
-      place: null,
-      placeChecked: false,
-      treadmill: null,
-      treadmillChecked: false
+      leashwalking: '',
+      distractions: '',
+      packwalk: '',
+      socialization: '',
+      obedience: '',
+      place: '',
+      treadmill: '',
+      crate: '',
+      customActivity: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -78,13 +72,8 @@ export default class ClientActivityLog extends React.Component {
   handleCheckBox(event) {
     const { name, value } = event.target;
     this.state[name]
-      ? this.setState({ [name]: null })
+      ? this.setState({ [name]: '' })
       : this.setState({ [name]: value });
-    const checkboxName = `${name}Checked`;
-    const checkboxValue = event.target.checked;
-    this.setState({
-      [checkboxName]: checkboxValue
-    });
   }
 
   handleChange(event) {
@@ -116,20 +105,14 @@ export default class ClientActivityLog extends React.Component {
         this.setState({
           activityLog: this.state.activityLog.concat(result),
           customActivity: '',
-          distractions: null,
-          distractionsChecked: false,
-          leashwalking: null,
-          leashwalkingChecked: false,
-          obedience: null,
-          obedienceChecked: false,
-          packwalk: null,
-          packwalkChecked: false,
-          place: null,
-          placeChecked: false,
-          socialization: null,
-          socializationChecked: false,
-          treadmill: null,
-          treadmillChecked: false
+          distractions: '',
+          leashwalking: '',
+          obedience: '',
+          packwalk: '',
+          place: '',
+          socialization: '',
+          treadmill: '',
+          crate: ''
         });
       });
   }
@@ -155,7 +138,7 @@ export default class ClientActivityLog extends React.Component {
                     id="leashwalking"
                     name="leashwalking"
                     value="Walking properly on leash."
-                    checked={this.state.leashwalkingChecked}
+                    checked={this.state.leashwalking}
                     onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="leashwalking">
                     Walking properly on leash
@@ -168,7 +151,7 @@ export default class ClientActivityLog extends React.Component {
                     id="distractions"
                     name="distractions"
                     value="Working around distractions."
-                    checked={this.state.distractionsChecked}
+                    checked={this.state.distractions}
                     onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="distractions">
                     Working around distractions
@@ -181,7 +164,7 @@ export default class ClientActivityLog extends React.Component {
                     id="packwalk"
                     name="packwalk"
                     value="Pack walk."
-                    checked={this.state.packwalkChecked}
+                    checked={this.state.packwalk}
                     onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="packwalk">
                     Pack walk
@@ -194,7 +177,7 @@ export default class ClientActivityLog extends React.Component {
                     id="socialization"
                     name="socialization"
                     value="Socialization/play time."
-                    checked={this.state.socializationChecked}
+                    checked={this.state.socialization}
                     onChange={handleCheckBox}/>
                   <label className="form-check-label" htmlFor="socialization">
                     Socialization/play time
@@ -209,7 +192,7 @@ export default class ClientActivityLog extends React.Component {
                     id="obedience"
                     name="obedience"
                     value="Basic obedience."
-                    checked={this.state.obedienceChecked}
+                    checked={this.state.obedience}
                     onChange={handleCheckBox} />
                   <label className="form-check-label" htmlFor="obedience">
                     Basic obedience
@@ -222,7 +205,7 @@ export default class ClientActivityLog extends React.Component {
                     id="place"
                     name="place"
                     value="Place board training."
-                    checked={this.state.placeChecked}
+                    checked={this.state.place}
                     onChange={handleCheckBox} />
                   <label className="form-check-label" htmlFor="place">
                     Place board training
@@ -235,10 +218,23 @@ export default class ClientActivityLog extends React.Component {
                     id="treadmill"
                     name="treadmill"
                     value="Treadmill."
-                    checked={this.state.treadmillChecked}
+                    checked={this.state.treadmill}
                     onChange={handleCheckBox} />
                   <label className="form-check-label" htmlFor="treadmill">
                     Treadmill
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="crate"
+                    name="crate"
+                    value="Crate training."
+                    checked={this.state.crate}
+                    onChange={handleCheckBox} />
+                  <label className="form-check-label" htmlFor="crate">
+                    Crate training
                   </label>
                 </div>
               </div>
