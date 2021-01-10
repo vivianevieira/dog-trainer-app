@@ -18,7 +18,7 @@ CREATE TABLE "Clients" (
 	"breed" varchar(255),
 	"gender" varchar(255),
 	"ownedSince" varchar(255),
-	"spayNeut" BOOLEAN,
+	"spayNeut" varchar(255),
 	"vaccinated" varchar(255),
 	"foodDiet" varchar(255),
 	"vet" varchar(255),

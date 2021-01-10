@@ -13,6 +13,9 @@ export default class Navbar extends React.Component {
       path === 'client-entry'
       ? 'nav-link active nav-bar-text'
       : 'nav-link nav-bar-text';
+    const activeLinkClass = path === 'active'
+      ? 'nav-link active nav-bar-text'
+      : 'nav-link nav-bar-text';
 
     return (
       <div className="container nav-bar-container">
@@ -29,7 +32,7 @@ export default class Navbar extends React.Component {
               </a>
             </div>
             <div className="nav-bar-icon-cont flex-fill">
-              <a className={clientsLinkClass} aria-current="page" href="#client-list">
+              <a className={clientsLinkClass} href="#client-list">
                 <div>
                   <i className="far fa-user-circle nav-bar-icon" />
                 </div>
@@ -37,7 +40,7 @@ export default class Navbar extends React.Component {
               </a>
             </div>
             <div className="nav-bar-icon-cont flex-fill">
-              <a className="nav-link nav-bar-text" href="#">
+              <a className={activeLinkClass} href="#active">
                 <div>
                   <i className="far fa-heart nav-bar-icon" />
                 </div>

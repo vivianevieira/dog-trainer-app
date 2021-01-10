@@ -39,12 +39,6 @@ export default class ClientDetails extends React.Component {
     if (client.profilePhoto) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
-    let $spayNeut = '';
-    if (client.spayNeut === true) {
-      $spayNeut = 'Yes';
-    } else if (client.spayNeut === false) {
-      $spayNeut = 'No';
-    }
 
     return (
       <>
@@ -117,7 +111,7 @@ export default class ClientDetails extends React.Component {
                 </tr>
                 <tr>
                   <td className="text-secondary">Neutered/Spayed?</td>
-                  <td>{$spayNeut}</td>
+                  <td>{client.spayNeut}</td>
                 </tr>
               </tbody>
             </table>

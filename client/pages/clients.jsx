@@ -80,7 +80,7 @@ export default class Clients extends React.Component {
     return (
       <>
       <div className="row">
-        <h6 className="page-title">Clients</h6>
+          <h6 className="fw-bolder pb-2 mb-4 border-bottom border-1">Clients</h6>
       </div>
       <div className="row content-cont">
         <div className="row justify-content-between clients-search-row">

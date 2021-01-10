@@ -34,7 +34,7 @@ app.post('/api/clients', (req, res, next) => {
                           $13, $14, $15, $16)
                 returning *
   `;
-  const params = [name, owner1, breed, '', '', '', '', '', '', false, '', '', '', '', '', false];
+  const params = [name, owner1, breed, '', '', '', '', '', '', '', '', '', '', '', '', false];
   db.query(sql, params)
     .then(result => {
       const [client] = result.rows;
@@ -277,6 +277,25 @@ app.get('/api/activitylog/:clientId', (req, res, next) => {
     where "clientId" = $1
   `;
   const params = [clientId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/active', (req, res, next) => {
+  const sql = `
+  select "name",
+         "clientId",
+         "owner1",
+         "owner2",
+         "profilePhoto"
+    from "Clients"
+    where "isActive" = $1
+    order by "clientId" desc
+  `;
+  const params = [true];
   db.query(sql, params)
     .then(result => {
       res.json(result.rows);
