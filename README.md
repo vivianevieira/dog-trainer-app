@@ -32,6 +32,7 @@ Try the application live at https://dog-net.herokuapp.com/
 ## planned additions
 * User can add new activity to a calendar.
 * User can view the calendar.
+* User can see a list of scheduled clients for the day.
 * User can create an account.
 * User can login and logout of the account.
 
