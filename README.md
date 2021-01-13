@@ -1,13 +1,16 @@
 # DogNet
 
-A full stack CRM application for dog trainers that allows users to add clients to a database and manage details about each client.
+A full stack CRM application for dog trainers that allows users to add clients to a database and manage details and activities for each client.
 
 ## technologies used
 * HTML5
 * CSS3
 * JavaScript
 * React
-* AWS
+* Node.js
+* Express
+* PostgreSQL
+* AWS S3
 * Bootstrap 5
 
 ## live demo
@@ -34,5 +37,6 @@ Try the application live at https://dog-net.herokuapp.com/
 
 ## preview
 
-![Image of app](https://i.ibb.co/6RyLrGs/Screen-Shot-2020-11-18-at-2-56-44-PM.png)
+![Image of app](https://dogtrainercrm-profilepictures.s3.us-east-2.amazonaws.com/screenshots/DogNet_screen_web.png)
+![Image of app](https://dogtrainercrm-profilepictures.s3.us-east-2.amazonaws.com/screenshots/DogNet-screen_mobile.png)
 
