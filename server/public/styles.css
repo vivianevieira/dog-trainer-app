@@ -149,6 +149,24 @@ body {
   .nav-bar-icon-cont {
     padding-bottom: 2rem;
   }
+
+  .client-name {
+    font-size: 1.25rem !important;
+  }
+
+  .clients-text2 {
+    font-size: 1rem !important;
+  }
+
+  .client-pic {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .clients-pic-cont {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 }
 
 @media (max-width: 576px) {

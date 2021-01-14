@@ -15,7 +15,7 @@ function Client(props) {
       <a
         href={`#client-details?clientId=${props.client.clientId}`}
         className="link-dark text-decoration-none">
-        <div className="fs-6">
+        <div className="client-name">
           {props.client.name}
         </div>
       </a>
