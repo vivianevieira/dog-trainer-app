@@ -73,11 +73,19 @@ export default class ClientDetails extends React.Component {
                 </tr>
                 <tr>
                   <td className="text-secondary">Phone</td>
-                  <td>{client.phone}</td>
+                  <td>
+                    <a href={`tel:1-${client.phone}`} className="link-dark text-decoration-none">
+                      {client.phone}
+                    </a>
+                  </td>
                 </tr>
                 <tr>
                   <td className="text-secondary">Email</td>
-                  <td>{client.email}</td>
+                  <td>
+                    <a href={`mailto:${client.email}`} className="link-dark text-decoration-none">
+                      {client.email}
+                    </a>
+                  </td>
                 </tr>
               </tbody>
             </table>
