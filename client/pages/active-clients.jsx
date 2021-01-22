@@ -9,20 +9,24 @@ function Client(props) {
   return (
     <div className="row">
       <div className="col d-flex clients-cont">
-        <div className="clients-pic-cont rounded-circle me-3">
-          {$imagePreview}
-        </div>
+        <a href={`#client-details?clientId=${props.client.clientId}`}>
+          <div className="clients-pic-cont rounded-circle me-3">
+            {$imagePreview}
+          </div>
+        </a>
         <div>
-          <a
-            href={`#client-details?clientId=${props.client.clientId}`}
-            className="link-dark text-decoration-none">
-            <div className="fs-6">
+          <a href={`#client-details?clientId=${props.client.clientId}`}
+             className="link-dark text-decoration-none">
+            <div className="client-name">
               {props.client.name}
             </div>
           </a>
-          <div className="clients-text2 ">
-            {props.client.owner1}
-          </div>
+          <a href={`#client-details?clientId=${props.client.clientId}`}
+            className="text-decoration-none">
+            <div className="clients-text2 ">
+              {props.client.owner1}
+            </div>
+          </a>
         </div>
       </div>
     </div>

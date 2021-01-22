@@ -8,9 +8,11 @@ function Client(props) {
   return (
     <div className="row">
     <div className="col d-flex clients-cont">
+      <a href={`#client-details?clientId=${props.client.clientId}`}>
         <div className="clients-pic-cont rounded-circle me-3">
           { $imagePreview }
-    </div>
+        </div>
+      </a>
     <div>
       <a
         href={`#client-details?clientId=${props.client.clientId}`}
@@ -19,9 +21,12 @@ function Client(props) {
           {props.client.name}
         </div>
       </a>
-      <div className="clients-text2 ">
-        {props.client.owner1}
-      </div>
+      <a href={`#client-details?clientId=${props.client.clientId}`}
+         className="text-decoration-none">
+        <div className="clients-text2 ">
+          {props.client.owner1}
+        </div>
+      </a>
     </div>
     </div>
     </div>
