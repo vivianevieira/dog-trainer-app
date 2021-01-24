@@ -40,6 +40,14 @@ export default class ClientDetails extends React.Component {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
 
+    const today = new Date();
+    const birthDate = new Date(client.dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
     return (
       <>
       <div className="row">
@@ -98,6 +106,10 @@ export default class ClientDetails extends React.Component {
                   <td>{client.dob}</td>
                 </tr>
                 <tr>
+                  <td className="text-secondary">Age</td>
+                  <td>{age }</td>
+                </tr>
+                <tr>
                   <td className="text-secondary">Breed</td>
                   <td>{client.breed}</td>
                 </tr>
@@ -132,7 +144,7 @@ export default class ClientDetails extends React.Component {
                   <td>{client.vaccinated}</td>
                 </tr>
                 <tr>
-                  <td className="text-secondary">Follows a special diet?</td>
+                  <td className="text-secondary">Special dietary requirements</td>
                   <td>{client.foodDiet}</td>
                 </tr>
               </tbody>
@@ -152,7 +164,7 @@ export default class ClientDetails extends React.Component {
                   <td>{client.health}</td>
                 </tr>
                 <tr>
-                  <td className="text-secondary">Has had training before?</td>
+                  <td className="text-secondary">List any prior training experience</td>
                   <td>{client.training}</td>
                 </tr>
               </tbody>

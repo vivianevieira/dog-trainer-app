@@ -196,7 +196,7 @@ export default class ClientInputDetails extends React.Component {
                 </label>
                 <input
                   id="dob"
-                  type="text"
+                  type="date"
                   name="dob"
                   value={client.dob}
                   onChange={this.handleChange}
