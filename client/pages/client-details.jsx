@@ -35,17 +35,26 @@ export default class ClientDetails extends React.Component {
 
   render() {
     const client = this.state;
+
     let $imagePreview = (<div className=""></div>);
     if (client.profilePhoto) {
       $imagePreview = (<img src={client.profilePhoto} alt="profile_pic" className="rounded-circle client-pic" width="50" height="50" />);
     }
 
-    const today = new Date();
-    const birthDate = new Date(client.dob);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+    let age = 0;
+    let months = 0;
+    if (client.dob) {
+      const today = new Date();
+      const birthDate = new Date(client.dob);
+      age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      months = m;
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      if (m < 0) {
+        months = (12 - birthDate.getMonth()) + today.getMonth();
+      }
     }
 
     return (
@@ -107,7 +116,7 @@ export default class ClientDetails extends React.Component {
                 </tr>
                 <tr>
                   <td className="text-secondary">Age</td>
-                  <td>{age }</td>
+                  <td>{age}y {months}m</td>
                 </tr>
                 <tr>
                   <td className="text-secondary">Breed</td>
