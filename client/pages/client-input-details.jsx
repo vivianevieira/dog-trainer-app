@@ -196,7 +196,7 @@ export default class ClientInputDetails extends React.Component {
                 </label>
                 <input
                   id="dob"
-                  type="text"
+                  type="date"
                   name="dob"
                   value={client.dob}
                   onChange={this.handleChange}
@@ -302,7 +302,7 @@ export default class ClientInputDetails extends React.Component {
               </div>
               <div className="mb-3">
                 <label htmlFor="food_diet" className="form-label label1">
-                  Follows a special diet?
+                  Special dietary requirements
                 </label>
                 <input
                   id="food_diet"
